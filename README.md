@@ -44,6 +44,8 @@ use the following commands.
 % source env/bin/activate
 ```
 
+If you are using Windows, the script will be located in the directory `env/Scripts` instead of `env/bin`.
+
 If you have a basic terminal setup, the terminal will show the virtual environment is activated by having a
 `(env)` at the very start of the command prompt.
 
