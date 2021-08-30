@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-1. [Setting up development](##setting-up-development)
-2. [Contribution guide](##contribution-guide)
+1. [Setting up development](#setting-up-development)
+2. [Contribution guide](#contribution-guide)
 
 ## Setting up development
 
