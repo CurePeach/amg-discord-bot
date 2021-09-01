@@ -3,7 +3,14 @@
 ## Table of Contents
 
 1. [Setting up development](#setting-up-development)
+
 2. [Contribution guide](#contribution-guide)
+
+    2.1 [Source control](#source-control)
+
+    2.2 [Source control](#style)
+
+    2.3 [Source control](#directory)
 
 ## Setting up development
 
@@ -81,4 +88,32 @@ but it is good practice to, just in case something has changed or been added.
 
 ## Contribution guide
 
-To be updated later.
+### Source control
+
+- Programming changes should be made in branches. The naming convention of branches are different in certain scenarios but all of them must be written in `kebab-case`.
+
+    - If it is a new command or feature, it should start with `new-`. For example, `new-command-poll` would be the name of the branch which has the purpose of creating a new command which created polls.
+
+    - If it is a bugfix or an update, it should start with `patch-`. For example, `patch-nightraven` would be a branch where the code is updating the command `nightraven`.
+
+- If a branch is to be merged in, make a pull request on the Github website and once it has been reviewed by the other two members, it will be merged in.
+
+### Style
+
+- Imports should be declared in alphabetical order with package imports and local imports divided. They should be listed in alphabetical order. 
+
+    - A package import is an import from a library accessible to everyone.
+
+    - A local import is an import from another file.
+
+    - If it is a `from ... import ...` import, it should be under all `import` imports and then ordered alphabetically by the name after `from`.
+
+- Indentation is 2 spaces.
+
+- All variables and functions should be named with the `snake_case` convention.
+
+### Files and directories
+
+- All files that are not classes should be named using `snake_case`.
+
+- When creating a class, the corresponding file should only contain that class and be named the same as the class. Both the name of the class in the code and the name of the file should be using `PascalCase`.
