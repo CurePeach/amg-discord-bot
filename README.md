@@ -8,9 +8,9 @@
 
     2.1 [Source control](#source-control)
 
-    2.2 [Source control](#style)
+    2.2 [Style](#style)
 
-    2.3 [Source control](#directory)
+    2.3 [Files and directories](#files-and-directories)
 
 ## Setting up development
 
