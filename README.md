@@ -38,7 +38,7 @@ keeping track of all of them inside the repository.
 pip 21.2.4 from <where pip is installed on your computer>
 % python3 -m pip install --user virtualenv
 ...
-% python -m venv env
+% python3 -m venv env
 ```
 
 If pip is not version 21, upgrade it by using the command: `python3 -m pip install --user --upgrade pip`.
