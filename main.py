@@ -35,8 +35,8 @@ async def on_message(context):
   """
   Waits until a particular message is sent and responds accordingly.
   """
-  channel = context.channel
-  author = context.author.name
+  CHANNEL = context.channel
+  AUTHOR = context.author.name
   #if "hello" in context.content.split():
   #  user = []
   #  for i in range(len(author)):
@@ -44,12 +44,14 @@ async def on_message(context):
   #          break
   #      user.append(author[i])
   #  await channel.send(f"Hello {''.join(user)}!")
-  if context.content.startswith("<:misakihydrate:879345153041661963>"):
-    await channel.send(f"Stay Hydrated! {context.content}")
+  if context.content.startswith("f"):
+    await bot.process_commands(context)
+  elif context.content.startswith("<:misakihydrate:879345153041661963>"):
+    await CHANNEL.send(f"Stay Hydrated! {context.content}")
   elif ("alright" in context.content.lower().split() or 
     "alright?" in context.content.lower().split()):
-    await channel.send("No you're all left! <:childefingerguns:879342498340823040>")
-  elif author.startswith("Rayshine69"):
-    await channel.send("Raymond stop spending money!")
+    await CHANNEL.send("No you're all left! <:childefingerguns:879342498340823040>")
+  elif AUTHOR.startswith("Rayshine69"):
+    await CHANNEL.send("Raymond stop spending money!")
 
 bot.run(TOKEN)
