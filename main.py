@@ -11,6 +11,7 @@ dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 bot = commands.Bot(command_prefix="f")
+BOT_ID = 880775837522198528
 
 @bot.event
 async def on_ready():
@@ -36,7 +37,13 @@ async def on_message(context):
   Waits until a particular message is sent and responds accordingly.
   """
   CHANNEL = context.channel
-  AUTHOR = context.author.name
+  AUTHOR_NAME = context.author.name
+  AUTHOR_ID = context.author.id
+
+  # If the bot is the author of the message, do not apply an event to it.
+  if AUTHOR_ID == BOT_ID:
+    return
+
   #if "hello" in context.content.split():
   #  user = []
   #  for i in range(len(author)):
@@ -44,6 +51,7 @@ async def on_message(context):
   #          break
   #      user.append(author[i])
   #  await channel.send(f"Hello {''.join(user)}!")
+
   if context.content.startswith("f"):
     await bot.process_commands(context)
   elif context.content.startswith("<:misakihydrate:879345153041661963>"):
@@ -51,7 +59,7 @@ async def on_message(context):
   elif ("alright" in context.content.lower().split() or 
     "alright?" in context.content.lower().split()):
     await CHANNEL.send("No you're all left! <:childefingerguns:879342498340823040>")
-  elif AUTHOR.startswith("Rayshine69"):
+  elif AUTHOR_NAME.startswith("Rayshine69"):
     await CHANNEL.send("Raymond stop spending money!")
 
 bot.run(TOKEN)
