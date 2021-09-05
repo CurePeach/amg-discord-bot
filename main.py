@@ -30,4 +30,26 @@ async def echo(context, *, arg):
   await context.message.delete()
   await context.send(arg)
 
+@bot.event
+async def on_message(context):
+  """
+  Waits until a particular message is sent and responds accordingly.
+  """
+  channel = context.channel
+  author = context.author.name
+  #if "hello" in context.content.split():
+  #  user = []
+  #  for i in range(len(author)):
+  #      if author[i] == "#":
+  #          break
+  #      user.append(author[i])
+  #  await channel.send(f"Hello {''.join(user)}!")
+  if context.content.startswith("<:misakihydrate:879345153041661963>"):
+    await channel.send(f"Stay Hydrated! {context.content}")
+  elif ("alright" in context.content.lower().split() or 
+    "alright?" in context.content.lower().split()):
+    await channel.send("No you're all left! <:childefingerguns:879342498340823040>")
+  elif author.startswith("Rayshine69"):
+    await channel.send("Raymond stop spending money!")
+
 bot.run(TOKEN)
