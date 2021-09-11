@@ -5,6 +5,7 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 # Package imports
 import dotenv 
 import os
+from src import dice
 from discord.ext import commands
 
 dotenv.load_dotenv()
@@ -70,4 +71,18 @@ async def on_message(context):
         await CHANNEL.send("Raymond stop spending money!")
         break
 
+@bot.command(name="roll")
+async def echo(context, *, arg):
+  """
+  Basic command that rolls a combination of dice
+  """
+  CHANNEL = context.channel
+  AUTHOR_NAME = context.author.name
+  MESSAGE = arg.split()
+  result = dice.roll(MESSAGE)
+  if len(result) == 1:
+    await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]}")
+  else:
+    await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]} -> {result[1]}")
+  
 bot.run(TOKEN)
