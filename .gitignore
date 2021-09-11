@@ -3,3 +3,6 @@ env
 
 # Private variables
 .env
+
+# Python cache
+__pycache__/
