@@ -62,7 +62,7 @@ async def on_message(context):
     await bot.process_commands(context)
   elif MESSAGE.startswith("<:misakihydrate:879345153041661963>"):
     await CHANNEL.send(f"Stay Hydrated! {MESSAGE}")
-  elif ("alright" in MESSAGE_WORDS):
+  elif "alright" in MESSAGE_WORDS:
     await CHANNEL.send("No you're all left! <:childefingerguns:879342498340823040>")
   elif AUTHOR_NAME.startswith("Rayshine69"):
     for word in MESSAGE_WORDS:
