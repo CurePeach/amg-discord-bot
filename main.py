@@ -11,6 +11,7 @@ dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 bot = commands.Bot(command_prefix="f")
+BOT_ID = 880775837522198528
 
 @bot.event
 async def on_ready():
@@ -29,5 +30,44 @@ async def echo(context, *, arg):
   """
   await context.message.delete()
   await context.send(arg)
+
+@bot.event
+async def on_message(context):
+  """
+  Waits until a particular message is sent and responds accordingly.
+  """
+  CHANNEL = context.channel
+  AUTHOR_NAME = context.author.name
+  AUTHOR_ID = context.author.id
+  MESSAGE = context.content
+  MESSAGE_SPLIT = MESSAGE.lower().split()
+  MESSAGE_WORDS = [a.strip(',.?! ') for a in MESSAGE_SPLIT]
+  RAY_WORD_BANK = ['credit', 'account', 'money', 'whale', 'saving', 'savings', 
+  'dolphin', 'spend', 'spent', 'spending', 'spends', 'accounts', 'card', 'buy', 
+  'buying', 'bought']
+
+  # If the bot is the author of the message, do not apply an event to it.
+  if AUTHOR_ID == BOT_ID:
+    return
+
+  #if "hello" in context.content.split():
+  #  user = []
+  #  for i in range(len(author)):
+  #      if author[i] == "#":
+  #          break
+  #      user.append(author[i])
+  #  await channel.send(f"Hello {''.join(user)}!")
+
+  if MESSAGE.startswith("f"):
+    await bot.process_commands(context)
+  elif MESSAGE.startswith("<:misakihydrate:879345153041661963>"):
+    await CHANNEL.send(f"Stay Hydrated! {MESSAGE}")
+  elif ("alright" in MESSAGE_WORDS):
+    await CHANNEL.send("No you're all left! <:childefingerguns:879342498340823040>")
+  elif AUTHOR_NAME.startswith("Rayshine69"):
+    for word in MESSAGE_WORDS:
+      if word in RAY_WORD_BANK:
+        await CHANNEL.send("Raymond stop spending money!")
+        break
 
 bot.run(TOKEN)
