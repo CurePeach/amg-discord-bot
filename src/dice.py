@@ -28,7 +28,6 @@ def roll(arg):
       i += 1
     elif len(arg[i]) > 1:
       if arg[i][1] == 'd':
-        j = 0
         mult_rolls = []
         for j in range(int(arg[i][0])):
           result, mult_rolls = dice_roll(arg, i - 1, mult_rolls)
@@ -41,7 +40,7 @@ def dice_roll(arg, index, array):
   if arg[index + 1] != 'd':
     die = int(arg[index + 1][1:].strip('d'))
   else:
-    die = int(arg[index + 1][1:].strip('d'))
+    die = int(arg[index + 1].strip('d'))
   result = random.randint(1, die)
   array.append(result)
   return result, array
