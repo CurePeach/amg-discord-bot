@@ -79,10 +79,13 @@ async def echo(context, *, arg):
   CHANNEL = context.channel
   AUTHOR_NAME = context.author.name
   MESSAGE = arg.split()
-  result = dice.roll(MESSAGE)
+  result, total = dice.roll(MESSAGE)
   if len(result) == 1:
-    await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]}")
+    if result[0] == total:
+      await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]}")
+    else:
+      await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]} -> {total}")
   else:
-    await CHANNEL.send(f"{AUTHOR_NAME} rolled {result[0]} -> {result[1]}")
+    await CHANNEL.send(f"{AUTHOR_NAME} rolled {result} -> {total}")
   
 bot.run(TOKEN)
