@@ -15,16 +15,30 @@ def roll(arg):
     elif arg[i] == '+':
       if arg[i+1][0] == 'd':
         result, result_list = dice_roll(arg, i, result_list)
+        total += result
+      elif len(arg[i+1]) > 1:
+        mult_rolls = []
+        for j in range(int(arg[i + 1][0])):
+          result, mult_rolls = dice_roll(arg, i, mult_rolls)
+          total += result
+        result_list.append(mult_rolls)
       else:
         result = int(arg[i+1])  
-      total += result
+        total += result
       i += 1
     elif arg[i] == '-':
       if arg[i+1][0] == 'd':
         result, result_list = dice_roll(arg, i, result_list)
+        total -= result
+      elif len(arg[i+1]) > 1:
+        mult_rolls = []
+        for j in range(int(arg[i + 1][0])):
+          result, mult_rolls = dice_roll(arg, i, mult_rolls)
+          total -= result
+        result_list.append(mult_rolls)
       else:
         result = int(arg[i+1]) 
-      total -= result
+        total -= result
       i += 1
     elif len(arg[i]) > 1:
       if arg[i][1] == 'd':
