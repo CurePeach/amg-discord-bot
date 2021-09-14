@@ -46,7 +46,6 @@ async def on_message(context):
   RAY_WORD_BANK = ['credit', 'account', 'money', 'whale', 'saving', 'savings', 
   'dolphin', 'spend', 'spent', 'spending', 'spends', 'accounts', 'card', 'buy', 
   'buying', 'bought']
-
   # If the bot is the author of the message, do not apply an event to it.
   if AUTHOR_ID == BOT_ID:
     return
@@ -77,15 +76,15 @@ async def echo(context, *, arg):
   Basic command that rolls a combination of dice
   """
   CHANNEL = context.channel
-  AUTHOR_NAME = context.author.display_name
+  AUTHOR_NAME = context.author.name
+  AUTHOR_USERNAME = context.author.display_name
   MESSAGE = arg.split()
   result, total = dice.roll(MESSAGE)
-  if len(result) == 1:
-    if result[0] == total:
-      await CHANNEL.send(f"__{AUTHOR_NAME}__ rolled `{result}`")
-    else:
-      await CHANNEL.send(f"__{AUTHOR_NAME}__ rolled {result} for a total of `{total}`")
+  if result == 0:
+    await CHANNEL.send("Invalid dice roll you idiot")
   else:
-    await CHANNEL.send(f"__{AUTHOR_NAME}__ rolled {result} for a total of `{total}`")
-  
+    await CHANNEL.send(f"__{AUTHOR_USERNAME}__ rolled {result} for a total of `{total}`")
+    if total == 1:
+      await CHANNEL.send("<:kekw:784692105678553138>")
+    
 bot.run(TOKEN)

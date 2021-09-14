@@ -47,6 +47,8 @@ def roll(arg):
           result, mult_rolls = dice_roll(arg, i - 1, mult_rolls)
           total += result
         result_list.append(mult_rolls)
+    if result == 0:
+      return 0 , total
     i += 1
   return format_roll_string(result_list), total
 
@@ -55,8 +57,11 @@ def dice_roll(arg, index, array):
     die = int(arg[index + 1][1:].strip('d'))
   else:
     die = int(arg[index + 1].strip('d'))
-  result = random.randint(1, die)
-  array.append(result)
+  if die < 2:
+    result = 0
+  else:
+    result = random.randint(1, die)
+    array.append(result)
   return result, array
   
 def format_roll_string(result_list):
