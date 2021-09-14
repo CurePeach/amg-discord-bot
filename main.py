@@ -5,6 +5,7 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 # Package imports
 import dotenv 
 import os
+import random
 from src import dice
 from discord.ext import commands
 
@@ -83,8 +84,13 @@ async def echo(context, *, arg):
   if result == 0:
     await CHANNEL.send("Invalid dice roll you idiot")
   else:
+    # Funny easter egg
+    if AUTHOR_NAME.startswith("NightRaven"):
+      if random.randint(1,2) == 1:
+        total = 1
+        result = '[1]'
+    # Don't tell him
     await CHANNEL.send(f"__{AUTHOR_USERNAME}__ rolled {result} for a total of `{total}`")
     if total == 1:
       await CHANNEL.send("<:kekw:784692105678553138>")
-    
 bot.run(TOKEN)
