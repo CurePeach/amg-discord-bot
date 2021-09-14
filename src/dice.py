@@ -48,7 +48,7 @@ def roll(arg):
           total += result
         result_list.append(mult_rolls)
     i += 1
-  return result_list, total
+  return format_roll_string(result_list), total
 
 def dice_roll(arg, index, array):
   if arg[index + 1] != 'd':
@@ -59,3 +59,11 @@ def dice_roll(arg, index, array):
   array.append(result)
   return result, array
   
+def format_roll_string(result_list):
+  string_list = []
+  for item in result_list:
+    if isinstance(item, int):
+      string_list.append(f"[{item}]")
+    else:
+      string_list.append(str(item))
+  return ' '.join(string_list)
