@@ -1,14 +1,20 @@
 """
-This file contains commands relating to rolling a dice
+This file contains commands relating to rolling a dice.
 """
 
 # Package imports
 import random
 
 def roll(arg):
+  """
+  TODO(gordon): function comment
+  Note. something this function comment needs which the functions in 
+  main.py don't need is describing what each parameter does. 
+  """
   result_list = []
   total = i = 0
   while i < len(arg):
+    # TODO(gordon): consider maybe having a parse function?
     if arg[i][0] == 'd':
       result, result_list = dice_roll(arg, i - 1, result_list)
       total += result
@@ -53,6 +59,9 @@ def roll(arg):
   return format_roll_string(result_list), total
 
 def dice_roll(arg, index, array):
+  """
+  TODO(gordon): function comment
+  """
   if arg[index + 1] != 'd':
     die = int(arg[index + 1][1:].strip('d'))
   else:
@@ -65,6 +74,9 @@ def dice_roll(arg, index, array):
   return result, array
   
 def format_roll_string(result_list):
+  """
+  TODO(gordon): function comment
+  """
   string_list = []
   for item in result_list:
     if isinstance(item, int):

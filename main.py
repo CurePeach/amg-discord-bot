@@ -6,8 +6,10 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 import dotenv 
 import os
 import random
-from src import dice
 from discord.ext import commands
+
+# Local imports
+from src import dice
 
 dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -47,20 +49,14 @@ async def on_message(context):
   RAY_WORD_BANK = ['credit', 'account', 'money', 'whale', 'saving', 'savings', 
   'dolphin', 'spend', 'spent', 'spending', 'spends', 'accounts', 'card', 'buy', 
   'buying', 'bought']
+
   # If the bot is the author of the message, do not apply an event to it.
   if AUTHOR_ID == BOT_ID:
     return
 
-  #if "hello" in context.content.split():
-  #  user = []
-  #  for i in range(len(author)):
-  #      if author[i] == "#":
-  #          break
-  #      user.append(author[i])
-  #  await channel.send(f"Hello {''.join(user)}!")
-
   if MESSAGE.startswith("f"):
     await bot.process_commands(context)
+  # TODO(someone): refactor this into its own file
   elif MESSAGE.startswith("<:misakihydrate:879345153041661963>"):
     await CHANNEL.send(f"Stay Hydrated! {MESSAGE}")
   elif "alright" in MESSAGE_WORDS:
@@ -80,7 +76,9 @@ async def echo(context, *, arg):
   AUTHOR_NAME = context.author.name
   AUTHOR_USERNAME = context.author.display_name
   MESSAGE = arg.split()
+
   result, total = dice.roll(MESSAGE)
+
   if result == 0:
     await CHANNEL.send("Invalid dice roll you idiot")
   else:
@@ -88,9 +86,10 @@ async def echo(context, *, arg):
     if AUTHOR_NAME.startswith("NightRaven"):
       if random.randint(1,2) == 1:
         total = 1
-        result = '[1]'
+        result = "[1]"
     # Don't tell him
     await CHANNEL.send(f"__{AUTHOR_USERNAME}__ rolled {result} for a total of `{total}`")
     if total == 1:
       await CHANNEL.send("<:kekw:784692105678553138>")
+
 bot.run(TOKEN)
