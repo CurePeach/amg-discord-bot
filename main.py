@@ -31,8 +31,9 @@ async def echo(context, *, arg):
   """
   await context.message.delete()
   ARGS = arg.split()
-  if 'late' in arg:
-    await context.send(f"{ARGS[1]} Happy late froggers birthday! <:frogsit:821689317042814988>")
+  if 'late' in ARGS:
+    user = [name for name in ARGS if not "late" in name]
+    await context.send(f"{user[0]} Happy late froggers birthday! <:frogsit:821689317042814988>")
   else:
     await context.send(f"{arg} Happy froggers birthday! <:frogsit:821689317042814988>")
 
