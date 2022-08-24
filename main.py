@@ -23,6 +23,19 @@ async def on_ready():
   for guild in bot.guilds:
     print(f"\t{guild.name}")
 
+@bot.command(name="bday")
+async def echo(context, *, arg):
+  """
+  Birthday command that sends a birthday message to a specified user.
+  if arg has the string 'late', then a different message is sent instead.
+  """
+  await context.message.delete()
+  ARGS = arg.split()
+  if 'late' in arg:
+    await context.send(f"{ARGS[1]} Happy late froggers birthday! <:frogsit:821689317042814988>")
+  else:
+    await context.send(f"{arg} Happy froggers birthday! <:frogsit:821689317042814988>")
+
 @bot.command(name="echo")
 async def echo(context, *, arg):
   """
