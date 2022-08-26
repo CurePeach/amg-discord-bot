@@ -5,6 +5,8 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 # Package imports
 import dotenv 
 import os
+import discord
+import random
 from discord.ext import commands
 
 dotenv.load_dotenv()
@@ -22,6 +24,18 @@ async def on_ready():
   print("And connected to the servers:")
   for guild in bot.guilds:
     print(f"\t{guild.name}")
+
+@bot.command(name="bonk")
+async def echo(context):
+  """
+  Command that sends a gif of someone getting bonked
+  """
+  gifList = ["https://tenor.com/view/bonk-doge-gif-24837098", 
+             "https://tenor.com/view/bonk-gif-19410756", 
+             "https://tenor.com/view/bonk-mega-bonk-bonk-dog-bonkers-bonk-anime-gif-24565990"]
+
+  index = random.randint(0,2)
+  await context.send(gifList[index])
 
 @bot.command(name="echo")
 async def echo(context, *, arg):
