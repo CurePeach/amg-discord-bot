@@ -6,6 +6,7 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 import dotenv 
 import os
 from discord.ext import commands
+import discord
 
 dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -27,7 +28,7 @@ async def on_ready():
 async def echo(context, *, arg):
   """
   Birthday command that sends a birthday message to a specified user.
-  if arg has the string 'late', then a different message is sent instead.
+  If arg has the string 'late', then a different message is sent instead.
   """
   await context.message.delete()
   ARGS = arg.split()
@@ -45,6 +46,44 @@ async def echo(context, *, arg):
   """
   await context.message.delete()
   await context.send(arg)
+
+@bot.command(name="embed")
+async def embed(context, *, arg):
+  """
+  Embed command repeats what the user says in an embedded message.
+  Different flags can be set with a hyphen. 
+  -c: Set the colour of the message (default: yellow 0xFEE75C)
+  -t: Set the title of the message
+  -s: Set the author of the message to be the current server
+  """
+  ARGS = arg.split("-")
+  DESC = ARGS[0]
+  COLOUR = 0xFEE75C # yellow 
+  SHOW_SERVER = False
+  SHOW_TITLE = False
+  for item in ARGS[1:]:
+    parts = item.split()
+    flag = parts[0]
+    content = item[2: ] # Past the hyphen and flag letter
+    if flag == "c":
+        COLOUR = int(content, 16)
+    elif flag == "t":
+        TITLE = content
+        SHOW_TITLE = True
+    elif flag == "s":
+        SHOW_SERVER = True
+
+  if SHOW_TITLE:
+    EMBED = discord.Embed(title = TITLE, description = DESC, colour = COLOUR)
+  else:
+    EMBED = discord.Embed(description = DESC, colour = COLOUR)
+
+  if SHOW_SERVER:
+    GUILD = context.message.guild
+    AUTHOR = GUILD.name
+    ICON_URL = GUILD.icon_url
+    EMBED.set_author(name = AUTHOR, icon_url = ICON_URL)
+  await context.send(embed = EMBED)
 
 @bot.event
 async def on_message(context):
