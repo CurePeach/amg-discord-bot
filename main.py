@@ -5,12 +5,15 @@ This file is the entryway to the bot. If you want to run the bot, this is the fi
 # Package imports
 import dotenv 
 import os
+import discord
 from discord.ext import commands
 
 dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-bot = commands.Bot(command_prefix="f")
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix="f", intents=intents)
 BOT_ID = 880775837522198528
 
 @bot.event
